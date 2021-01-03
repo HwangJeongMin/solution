@@ -1,12 +1,15 @@
 import React from "react";
 import { Redirect } from "react-router";
-import Dashboard from "../views/content/Dashboard";
-import BasicManagement from "../views/content/BasicManagement";
-import GoodsManagement from "../views/content/GoodsManagement";
-import StockManagement from "../views/content/StockManagement";
-import OrdersManagement from "../views/content/OrdersManagement";
-import ShopManagement from "../views/content/ShopManagement";
-import PeristalsisManagement from "../views/content/PeristalsisManagement";
+import Dashboard from "../views/dashboard/Dashboard";
+import Orders from "../views/content/Orders";
+import Shop from "../views/content/Shop";
+import Peristalsis from "../views/content/Peristalsis";
+
+import ListOfUsers from "../views/basic/ListOfUsers";
+import Category from "../views/goods/Category";
+import ListOfGoods from "../views/goods/ListOfGoods";
+import Warehouse from "../views/stock/Warehouse";
+import Inventory from "../views/stock/Inventory";
 
 const routes = [
     {
@@ -19,28 +22,51 @@ const routes = [
         component: () => <Dashboard />
     },
     {
-        path: "/basicManagement",
-        component: () => <BasicManagement />
+        path: "/basic",
+        exact: true,
+        component: () => <Redirect to="/basic/listOfUsers" />
     },
     {
-        path: "/goodsManagement",
-        component: () => <GoodsManagement />
+        path: "/basic/listOfUsers",
+        component: () => <ListOfUsers />
     },
     {
-        path: "/stockManagement",
-        component: () => <StockManagement />
+        path: "/goods",
+        exact: true,
+        component: () => <Redirect to="/goods/category" />
     },
     {
-        path: "/ordersManagement",
-        component: () => <OrdersManagement />
+        path: "/goods/category",
+        component: () => <Category />
     },
     {
-        path: "/shopManagement",
-        component: () => <ShopManagement />
+        path: "/goods/listOfGoods",
+        component: () => <ListOfGoods />
     },
     {
-        path: "/peristalsisManagement",
-        component: () => <PeristalsisManagement />
+        path: "/stock",
+        exact: true,
+        component: () => <Redirect to="/stock/warehouse" />
+    },
+    {
+        path: "/stock/warehouse",
+        component: () => <Warehouse />
+    },
+    {
+        path: "/stock/inventory",
+        component: () => <Inventory />
+    },
+    {
+        path: "/orders",
+        component: () => <Orders />
+    },
+    {
+        path: "/shop",
+        component: () => <Shop />
+    },
+    {
+        path: "/peristalsis",
+        component: () => <Peristalsis />
     }
 ];
 

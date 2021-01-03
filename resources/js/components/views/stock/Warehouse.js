@@ -15,16 +15,16 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     }
 }));
-const BasicManagement = () => {
+const Warehouse = () => {
     const classes = useStyles();
     return (
         <React.Fragment>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>BasicManagement</Typography>
+                <Typography paragraph>Warehouse</Typography>
             </main>
         </React.Fragment>
     );
 };
 
-export default BasicManagement;
+export default Warehouse;

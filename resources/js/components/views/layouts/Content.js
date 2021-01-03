@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import routes from "../../config/pathRoute";
-import Dashboard from "../content/Dashboard";
 
 function Content(props) {
-    // useEffect(() => {
-    //     props.changePathname(props.location.pathname);
-    // });
+    useEffect(() => {
+        props.changePathname(props.location.pathname);
+    });
     // console.log(routes);
     return (
         <React.Fragment>

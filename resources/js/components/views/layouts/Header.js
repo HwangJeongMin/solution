@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-// import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,11 +15,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import HeaderUserItems from "./HeaderUserItems";
-
-import SettingIcon from "@material-ui/icons/Settings";
 import AdminCategory from "../../config/adminCategoryItems";
 import { adminCategoryItems } from "../../config/adminCategoryItems";
 
@@ -95,10 +91,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function MiniDrawer() {
+const Header = props => {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [PageInfo, setPageInfo] = useState({});
+    const [SubCategory, setSubCategory] = useState([]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -107,6 +105,15 @@ export default function MiniDrawer() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    React.useEffect(() => {
+        adminCategoryItems.forEach(item => {
+            if (item.path === props.fathName) {
+                setPageInfo({ title: item.title, icon: item.icon });
+                setSubCategory(item.subCategory);
+            }
+        });
+    }, [props.fathName]);
 
     return (
         <React.Fragment>
@@ -166,42 +173,29 @@ export default function MiniDrawer() {
                 <Divider />
                 <List>
                     <ListItem button>
-                        <ListItemIcon>
-                            <SettingIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="기초 정보 관리" />
+                        <ListItemIcon>{PageInfo.icon}</ListItemIcon>
+                        <ListItemText primary={PageInfo.title} />
                     </ListItem>
                 </List>
                 <Divider />
 
                 <List>
-                    {["Inbox", "Starred", "Send email", "Drafts"].map(
-                        (text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? (
-                                        <SettingIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        )
+                    {SubCategory ? (
+                        SubCategory.map((item, index) => (
+                            <Link to={item.path} key={index}>
+                                <ListItem button>
+                                    <ListItemIcon>{item.icon}</ListItemIcon>
+                                    <ListItemText primary={item.title} />
+                                </ListItem>
+                            </Link>
+                        ))
+                    ) : (
+                        <></>
                     )}
                 </List>
-                {/* <Divider />
-                <List>
-                    {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List> */}
             </Drawer>
         </React.Fragment>
     );
-}
+};
+
+export default Header;

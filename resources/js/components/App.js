@@ -12,12 +12,16 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
     const classes = useStyles();
+    const [FathName, setFathName] = React.useState("");
+    const pathnameHandler = value => {
+        setFathName(value);
+    };
     return (
         <React.Fragment>
             <Router>
                 <div className={classes.root}>
-                    <Header />
-                    <Content />
+                    <Header fathName={FathName} />
+                    <Content changePathname={pathnameHandler} />
                 </div>
             </Router>
         </React.Fragment>
