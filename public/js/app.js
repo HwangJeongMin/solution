@@ -91654,7 +91654,7 @@ var routes = [{
   exact: true,
   component: function component() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-      to: "/dashboard"
+      to: "/basic/listOfUsers"
     });
   }
 }, {
@@ -91803,7 +91803,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function DataTable() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-col mt-20 mx-6"
+    className: "flex flex-col mt-20 mx-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
