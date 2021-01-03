@@ -1,0 +1,24 @@
+.link-css {
+    color: #080808;
+}
+
+.link-css:hover {
+    color: #080808;
+    font-weight: bold;
+}
+
+.link-logo-css {
+    color: #f10d0d;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #080808;
+}
+
+body {
+    background: #f0f8ff;
+}
