@@ -1,50 +1,101 @@
 import React from "react";
-import { DataGrid } from "@material-ui/data-grid";
-
-const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    {
-        field: "age",
-        headerName: "Age",
-        type: "number",
-        width: 90
-    },
-    {
-        field: "fullName",
-        headerName: "Full name",
-        description: "This column has a value getter and is not sortable.",
-        sortable: false,
-        width: 160,
-        valueGetter: params =>
-            `${params.getValue("firstName") || ""} ${params.getValue(
-                "lastName"
-            ) || ""}`
-    }
-];
-
-const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 }
-];
 
 export default function DataTable() {
     return (
-        <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSize={5}
-                checkboxSelection
-            />
-        </div>
+        <React.Fragment>
+            <div className="flex flex-col mt-20 mx-6">
+                <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Name
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Title
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Status
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Role
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            className="relative px-6 py-3"
+                                        >
+                                            <span className="sr-only">
+                                                Edit
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="flex items-center">
+                                                <div className="flex-shrink-0 h-10 w-10">
+                                                    <img
+                                                        className="h-10 w-10 rounded-full"
+                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div className="ml-4">
+                                                    <div className="text-sm font-medium text-gray-900">
+                                                        Jane Cooper
+                                                    </div>
+                                                    <div className="text-sm text-gray-500">
+                                                        jane.cooper@example.com
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-900">
+                                                Regional Paradigm Technician
+                                            </div>
+                                            <div className="text-sm text-gray-500">
+                                                Optimization
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Admin
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <a
+                                                href="#"
+                                                className="text-indigo-600 hover:text-indigo-900"
+                                            >
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
     );
 }
