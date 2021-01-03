@@ -107,13 +107,17 @@ const Header = props => {
     };
 
     React.useEffect(() => {
+        let pathName = props.pathName.split("/");
+        let filter = pathName.filter(path => {
+            if (path) return path;
+        });
         adminCategoryItems.forEach(item => {
-            if (item.path === props.fathName) {
+            if (item.path === `${"/" + filter[0]}`) {
                 setPageInfo({ title: item.title, icon: item.icon });
                 setSubCategory(item.subCategory);
             }
         });
-    }, [props.fathName]);
+    }, [props.pathName]);
 
     return (
         <React.Fragment>
