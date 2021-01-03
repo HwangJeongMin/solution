@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function MiniDrawer() {
+const Dashboard = () => {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -58,4 +58,6 @@ export default function MiniDrawer() {
             </main>
         </React.Fragment>
     );
-}
+};
+
+export default Dashboard;

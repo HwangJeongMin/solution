@@ -108,8 +108,6 @@ export default function MiniDrawer() {
         setOpen(false);
     };
 
-    console.log(adminCategoryItems);
-
     return (
         <React.Fragment>
             {/* <CssBaseline /> */}

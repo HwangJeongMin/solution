@@ -1,7 +1,8 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "./views/layouts/Header";
-import Dashboard from "./views/content/Dashboard";
+import Content from "./views/layouts/Content";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,10 +14,12 @@ const App = () => {
     const classes = useStyles();
     return (
         <React.Fragment>
-            <div className={classes.root}>
-                <Header />
-                <Dashboard />
-            </div>
+            <Router>
+                <div className={classes.root}>
+                    <Header />
+                    <Content />
+                </div>
+            </Router>
         </React.Fragment>
     );
 };
