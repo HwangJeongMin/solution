@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -18,6 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HeaderUserItems from "./HeaderUserItems";
 import AdminCategory from "../../config/adminCategoryItems";
 import { adminCategoryItems } from "../../config/adminCategoryItems";
+import LinkItems from "./LinkItems";
 
 const drawerWidth = 240;
 
@@ -97,7 +98,6 @@ const Header = props => {
     const [open, setOpen] = useState(false);
     const [PageInfo, setPageInfo] = useState({});
     const [SubCategory, setSubCategory] = useState([]);
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -106,7 +106,7 @@ const Header = props => {
         setOpen(false);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         let pathName = props.pathName.split("/");
         let filter = pathName.filter(path => {
             if (path) return path;
@@ -118,7 +118,6 @@ const Header = props => {
             }
         });
     }, [props.pathName]);
-
     return (
         <React.Fragment>
             {/* <CssBaseline /> */}
@@ -186,12 +185,11 @@ const Header = props => {
                 <List>
                     {SubCategory ? (
                         SubCategory.map((item, index) => (
-                            <Link to={item.path} key={index}>
-                                <ListItem button>
-                                    <ListItemIcon>{item.icon}</ListItemIcon>
-                                    <ListItemText primary={item.title} />
-                                </ListItem>
-                            </Link>
+                            <LinkItems
+                                item={item}
+                                Pathname={props.pathName}
+                                key={index}
+                            />
                         ))
                     ) : (
                         <></>
