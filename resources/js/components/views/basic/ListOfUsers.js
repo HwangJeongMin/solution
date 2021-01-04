@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PeopleIcon from "@material-ui/icons/People";
-import SimpleModal from "../layer/SimpleLayer";
+import Register from "../user/Register";
 
 export default function DataTable() {
     const [IsShowAddUserLayer, setIsShowAddUserLayer] = useState(false);
@@ -10,7 +10,7 @@ export default function DataTable() {
     return (
         <React.Fragment>
             {IsShowAddUserLayer ? (
-                <SimpleModal onShowHandler={toggleShowHandler} />
+                <Register onShowHandler={toggleShowHandler} />
             ) : (
                 <></>
             )}
@@ -19,7 +19,7 @@ export default function DataTable() {
                     <button
                         onClick={toggleShowHandler}
                         type="button"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium
+                        className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium
                         text-white bg-indigo-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         <PeopleIcon />
@@ -164,9 +164,9 @@ export default function DataTable() {
                                         aria-hidden="true"
                                     >
                                         <path
-                                            fill-rule="evenodd"
+                                            fillRule="evenodd"
                                             d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"
+                                            clipRule="evenodd"
                                         />
                                     </svg>
                                 </a>
@@ -223,9 +223,9 @@ export default function DataTable() {
                                         aria-hidden="true"
                                     >
                                         <path
-                                            fill-rule="evenodd"
+                                            fillRule="evenodd"
                                             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd"
+                                            clipRule="evenodd"
                                         />
                                     </svg>
                                 </a>
