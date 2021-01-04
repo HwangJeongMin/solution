@@ -15,6 +15,17 @@ function Register(props) {
     const onPasswordHandler = event => {
         setPassword(event.currentTarget.value);
     };
+    const onSubmitHandler = event => {
+        event.preventDefault();
+
+        let body = {
+            name: Name,
+            email: Email,
+            password: Password
+        };
+
+        console.log(body);
+    };
 
     const cancelAddUser = () => {
         props.onShowHandler();
@@ -47,7 +58,7 @@ function Register(props) {
                                 <div className="bg-gray-50 px-4 py-3 px-6 flex text-lg font-bold text-indigo-600">
                                     사용자 추가
                                 </div>
-                                <form action="/#" method="POST">
+                                <form onSubmit={onSubmitHandler}>
                                     <div className="shadow overflow-hidden sm:rounded-md">
                                         <div className="px-4 py-5 bg-white sm:p-6">
                                             <div className="grid grid-cols-6 gap-6">
@@ -113,7 +124,8 @@ function Register(props) {
                                             </button>
                                             <button
                                                 type="submit"
-                                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white
+												bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 Save
                                             </button>

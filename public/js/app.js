@@ -97872,6 +97872,16 @@ function Register(props) {
     setPassword(event.currentTarget.value);
   };
 
+  var onSubmitHandler = function onSubmitHandler(event) {
+    event.preventDefault();
+    var body = {
+      name: Name,
+      email: Email,
+      password: Password
+    };
+    console.log(body);
+  };
+
   var cancelAddUser = function cancelAddUser() {
     props.onShowHandler();
   };
@@ -97900,8 +97910,7 @@ function Register(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bg-gray-50 px-4 py-3 px-6 flex text-lg font-bold text-indigo-600"
   }, "\uC0AC\uC6A9\uC790 \uCD94\uAC00"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    action: "/#",
-    method: "POST"
+    onSubmit: onSubmitHandler
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "shadow overflow-hidden sm:rounded-md"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
