@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import PeopleIcon from "@material-ui/icons/People";
 import SimpleModal from "../layer/SimpleLayer";
 
 export default function DataTable() {
+    const [IsShowAddUserLayer, setIsShowAddUserLayer] = useState(false);
+    const toggleShowHandler = () => {
+        setIsShowAddUserLayer(!IsShowAddUserLayer);
+    };
     return (
         <React.Fragment>
-            <SimpleModal />
+            {IsShowAddUserLayer ? (
+                <SimpleModal onShowHandler={toggleShowHandler} />
+            ) : (
+                <></>
+            )}
             <div className="flex flex-col mt-16 mx-4">
                 <div className="p-4">
                     <button
-                        onClick={() => (window.location.href = "/register")}
+                        onClick={toggleShowHandler}
                         type="button"
                         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium
                         text-white bg-indigo-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
