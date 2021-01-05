@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/register', [App\Http\Controllers\User\RegisterController::class, 'register']);
+Route::get('/get-user-list', [UserController::class, 'getUserList']);
+
+Route::post('/register', [UserController::class, 'store']);
 
 Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');

@@ -98928,12 +98928,14 @@ module.exports = function(module) {
 /*!****************************************!*\
   !*** ./resources/js/_actions/types.js ***!
   \****************************************/
-/*! exports provided: REGISTER_USER */
+/*! exports provided: LIST_OF_USER, REGISTER_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIST_OF_USER", function() { return LIST_OF_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REGISTER_USER", function() { return REGISTER_USER; });
+var LIST_OF_USER = "list_of_user";
 var REGISTER_USER = "register_user";
 
 /***/ }),
@@ -98942,19 +98944,39 @@ var REGISTER_USER = "register_user";
 /*!**********************************************!*\
   !*** ./resources/js/_actions/user_action.js ***!
   \**********************************************/
-/*! exports provided: registerUser */
+/*! exports provided: getUserList, registerUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserList", function() { return getUserList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/_actions/types.js");
 
 
+function getUserList(dataToSubmit) {
+  // const request = Axios.get("/get-user-list").then(response => response.data);
+  var request = axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/get-user-list", dataToSubmit).then(function (response) {
+    console.log(response);
+    return {
+      success: true,
+      data: response.data
+    };
+  })["catch"](function (error) {
+    return {
+      success: false,
+      data: error
+    };
+  });
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__["LIST_OF_USER"],
+    payload: request
+  };
+}
 function registerUser(dataToSubmit) {
-  var response = axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/register", dataToSubmit).then(function (response) {
+  var request = axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/register", dataToSubmit).then(function (response) {
     return {
       success: true,
       data: response.data
@@ -98967,7 +98989,7 @@ function registerUser(dataToSubmit) {
   });
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_1__["REGISTER_USER"],
-    payload: response
+    payload: request
   };
 }
 
@@ -99016,6 +99038,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LIST_OF_USER"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        register: action.payload
+      });
+
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_USER"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         register: action.payload
@@ -99465,6 +99492,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
 /* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _user_Register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../user/Register */ "./resources/js/components/views/user/Register.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99479,8 +99508,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // import { useDispatch } from "react-redux";
+// import { getUserList } from "../../../_actions/user_action";
+
+
+var tableHeaders = ["고유번호", "이름", "이메일", "편집"];
+
+var getUserList = function getUserList() {
+  var body = {
+    mode: "getUserList"
+  };
+  var request = axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/get-user-list", body).then(function (response) {
+    // console.log(response);
+    return {
+      success: true,
+      data: response.data
+    };
+  })["catch"](function (error) {
+    return {
+      success: false,
+      data: error
+    };
+  });
+  return request;
+};
 
 function DataTable() {
+  // const dispatch = useDispatch();
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       IsShowAddUserLayer = _useState2[0],
@@ -99489,6 +99543,14 @@ function DataTable() {
   var toggleShowHandler = function toggleShowHandler() {
     setIsShowAddUserLayer(!IsShowAddUserLayer);
   };
+
+  console.log(getUserList()); // console.log(getUserList(body));
+  // dispatch(getUserList(body)).then(response => {
+  //     if (response.payload) {
+  //     } else {
+  //         alert("Fail to get list of user");
+  //     }
+  // });
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, IsShowAddUserLayer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_Register__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onShowHandler: toggleShowHandler
@@ -99512,26 +99574,19 @@ function DataTable() {
     className: "min-w-full divide-y divide-gray-200"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
     className: "bg-gray-50"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    scope: "col",
-    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-  }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    scope: "col",
-    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-  }, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    scope: "col",
-    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-  }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    scope: "col",
-    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-  }, "Role"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    scope: "col",
-    className: "relative px-6 py-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Edit")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, tableHeaders.map(function (th, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      key: index,
+      scope: "col",
+      className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+    }, th);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
     className: "bg-white divide-y divide-gray-200"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "px-6 py-4 whitespace-nowrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+  }, "1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "px-6 py-4 whitespace-nowrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex items-center"
@@ -99545,21 +99600,11 @@ function DataTable() {
     className: "ml-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-sm font-medium text-gray-900"
-  }, "Jane Cooper"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "text-sm text-gray-500"
-  }, "jane.cooper@example.com")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, "Jane Cooper")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "px-6 py-4 whitespace-nowrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-sm text-gray-900"
-  }, "Regional Paradigm Technician"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "text-sm text-gray-500"
-  }, "Optimization")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "px-6 py-4 whitespace-nowrap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-  }, "Active")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-  }, "Admin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, "jane.cooper@example.com")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",

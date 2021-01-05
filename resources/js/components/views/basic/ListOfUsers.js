@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PeopleIcon from "@material-ui/icons/People";
 import Register from "../user/Register";
+// import { useDispatch } from "react-redux";
+// import { getUserList } from "../../../_actions/user_action";
+import Axios from "axios";
+
+const tableHeaders = ["고유번호", "이름", "이메일", "편집"];
+
+const getUserList = () => {
+    let body = {
+        mode: "getUserList"
+    };
+
+    const request = Axios.get("/get-user-list", body)
+        .then(response => {
+            // console.log(response);
+            return { success: true, data: response.data };
+        })
+        .catch(error => {
+            return { success: false, data: error };
+        });
+
+    return request;
+};
 
 export default function DataTable() {
+    // const dispatch = useDispatch();
     const [IsShowAddUserLayer, setIsShowAddUserLayer] = useState(false);
     const toggleShowHandler = () => {
         setIsShowAddUserLayer(!IsShowAddUserLayer);
     };
+
+    console.log(getUserList());
+
+    // console.log(getUserList(body));
+
+    // dispatch(getUserList(body)).then(response => {
+    //     if (response.payload) {
+    //     } else {
+    //         alert("Fail to get list of user");
+    //     }
+    // });
+
     return (
         <React.Fragment>
             {IsShowAddUserLayer ? (
@@ -32,42 +67,24 @@ export default function DataTable() {
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                        >
-                                            Name
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                        >
-                                            Title
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                        >
-                                            Status
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                        >
-                                            Role
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="relative px-6 py-3"
-                                        >
-                                            <span className="sr-only">
-                                                Edit
-                                            </span>
-                                        </th>
+                                        {tableHeaders.map((th, index) => (
+                                            <th
+                                                key={index}
+                                                scope="col"
+                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                            >
+                                                {th}
+                                            </th>
+                                        ))}
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     <tr>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                1
+                                            </span>
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0 h-10 w-10">
@@ -81,27 +98,13 @@ export default function DataTable() {
                                                     <div className="text-sm font-medium text-gray-900">
                                                         Jane Cooper
                                                     </div>
-                                                    <div className="text-sm text-gray-500">
-                                                        jane.cooper@example.com
-                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-sm text-gray-900">
-                                                Regional Paradigm Technician
+                                                jane.cooper@example.com
                                             </div>
-                                            <div className="text-sm text-gray-500">
-                                                Optimization
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                Active
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Admin
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a
