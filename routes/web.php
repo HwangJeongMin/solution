@@ -20,5 +20,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/register', [App\Http\Controllers\User\RegisterController::class, 'register']);
 
 Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../../_actions/user_action";
 import TextField from "@material-ui/core/TextField";
 
 function Register(props) {
+    const dispatch = useDispatch();
     const [Name, setName] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
@@ -24,7 +27,14 @@ function Register(props) {
             password: Password
         };
 
-        console.log(body);
+        dispatch(registerUser(body)).then(response => {
+            if (response.payload.success) {
+                alert("Success to sign up");
+                cancelAddUser();
+            } else {
+                alert("Fail to sign up");
+            }
+        });
     };
 
     const cancelAddUser = () => {
