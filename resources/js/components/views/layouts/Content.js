@@ -5,7 +5,7 @@ import routes from "../../config/pathRoute";
 function Content(props) {
     useEffect(() => {
         props.changePathname(props.location.pathname);
-    });
+    }, [props.location.pathname]);
     // console.log(routes);
     return (
         <React.Fragment>

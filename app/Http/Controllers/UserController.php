@@ -17,11 +17,12 @@ class UserController extends Controller
     {
         // return User::all();
         $data = $request->validate([
-            'mode' => 'require|string'
+            'mode' => 'required|string'
         ]);
 
-        if($data === 'getUserList')
-            return response()->json(['result' => 'ok']);
+        if($data['mode'] === 'getUserList')
+            return User::all();
+            // return response()->json(['result' => 'ok']);
     }
 
     /**

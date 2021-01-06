@@ -1,46 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import PeopleIcon from "@material-ui/icons/People";
 import Register from "../user/Register";
-// import { useDispatch } from "react-redux";
-// import { getUserList } from "../../../_actions/user_action";
-import Axios from "axios";
 
 const tableHeaders = ["고유번호", "이름", "이메일", "편집"];
 
-const getUserList = () => {
-    let body = {
-        mode: "getUserList"
-    };
-
-    const request = Axios.get("/get-user-list", body)
-        .then(response => {
-            // console.log(response);
-            return { success: true, data: response.data };
-        })
-        .catch(error => {
-            return { success: false, data: error };
-        });
-
-    return request;
-};
-
-export default function DataTable() {
-    // const dispatch = useDispatch();
+const DataTable = props => {
     const [IsShowAddUserLayer, setIsShowAddUserLayer] = useState(false);
+    const [UsersLists, setUsersLists] = useState({});
     const toggleShowHandler = () => {
         setIsShowAddUserLayer(!IsShowAddUserLayer);
     };
 
-    console.log(getUserList());
+    useEffect(() => {
+        props.userList().then(obj => {
+            // console.log(obj.data);
+            setUsersLists(obj.data);
+        });
+    }, []);
 
-    // console.log(getUserList(body));
-
-    // dispatch(getUserList(body)).then(response => {
-    //     if (response.payload) {
-    //     } else {
-    //         alert("Fail to get list of user");
-    //     }
-    // });
+    console.log(UsersLists);
 
     return (
         <React.Fragment>
@@ -239,4 +218,6 @@ export default function DataTable() {
             </div>
         </React.Fragment>
     );
-}
+};
+
+export default withRouter(DataTable);

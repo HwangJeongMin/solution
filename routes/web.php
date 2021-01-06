@@ -20,9 +20,17 @@ use App\Http\Controllers\UserController;
 
 Auth::routes();
 
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/get-user-list', [UserController::class, 'getUserList']);
+Route::middleware(['cors'])->group(function(){
+    Route::get('/csrf_token', function(){
+        return csrf_token();
+    });
+    // Route::post('example','Controller@example');
+    Route::get('/get-user-list', [UserController::class, 'getUserList']);
 
-Route::post('/register', [UserController::class, 'store']);
+    Route::post('/register', [UserController::class, 'store']);
+});
+
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
